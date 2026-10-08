@@ -13,17 +13,17 @@ export type UpdateTodoInput = {
 
 export const todoService = {
   /** Return all todos, newest first */
-  async getAll() {
+  getAll: async () => {
     return db.orm.public.Todo.orderBy((t) => t.createdAt.desc()).all();
   },
 
   /** Return a single todo by id, or null if not found */
-  async getById(id: number) {
+  getById: async (id: number) => {
     return db.orm.public.Todo.where({ id }).first();
   },
 
   /** Create a new todo */
-  async create(data: CreateTodoInput) {
+  create: async (data: CreateTodoInput) => {
     return db.orm.public.Todo.create({
       title: data.title,
       description: data.description ?? null,
@@ -32,7 +32,7 @@ export const todoService = {
   },
 
   /** Update an existing todo — returns null if not found */
-  async update(id: number, data: UpdateTodoInput) {
+  update: async (id: number, data: UpdateTodoInput) => {
     return db.orm.public.Todo.where({ id }).update({
       ...(data.title !== undefined && { title: data.title }),
       ...(data.description !== undefined && { description: data.description }),
@@ -41,7 +41,7 @@ export const todoService = {
   },
 
   /** Toggle the completed flag — returns null if not found */
-  async toggle(id: number) {
+  toggle: async (id: number) => {
     const existing = await db.orm.public.Todo.where({ id }).first();
     if (!existing) return null;
 
@@ -51,7 +51,7 @@ export const todoService = {
   },
 
   /** Delete a todo — returns null if not found */
-  async delete(id: number) {
+  delete: async (id: number) => {
     return db.orm.public.Todo.where({ id }).delete();
   },
 };
