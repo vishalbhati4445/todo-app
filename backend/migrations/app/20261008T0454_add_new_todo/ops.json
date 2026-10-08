@@ -1,0 +1,41 @@
+[
+  {
+    "id": "table.Todonew",
+    "label": "Create table \"Todonew\"",
+    "summary": "Creates table \"Todonew\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "table",
+        "name": "Todonew"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"Todonew\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"Todonew\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create table \"Todonew\"",
+        "sql": "CREATE TABLE \"public\".\"Todonew\" (\n  \"completed\" bool DEFAULT false NOT NULL,\n  \"createdAt\" timestamptz DEFAULT (now()) NOT NULL,\n  \"description\" text,\n  \"id\" SERIAL NOT NULL,\n  \"title\" text NOT NULL,\n  \"updatedAt\" timestamptz DEFAULT (now()) NOT NULL,\n  PRIMARY KEY (\"id\")\n)",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"Todonew\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"public\".\"Todonew\""
+        ]
+      }
+    ]
+  }
+]

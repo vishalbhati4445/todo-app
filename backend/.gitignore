@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 # Logs
 logs
 *.log
@@ -147,4 +148,9 @@ vite.config.ts.timestamp-*
 
 # Turbo Repo
 .turbo
+<<<<<<< HEAD
 dist/
+=======
+=======
+>>>>>>> Stashed changes
+>>>>>>> d68875401417e8f8adb19a2ee9b329b8c675660d
